@@ -222,7 +222,7 @@
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          _subject: "Message form Aver Html!",
+          _subject: "Message form AVIKJAINDEV Html!",
           name: full_name.value,
           email: email.value,
           message: message.value,
