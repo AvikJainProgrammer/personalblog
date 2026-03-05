@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avik Jain</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f5f0;
+      --ink: #1a1a1a;
+      --muted: #888;
+      --accent: #c0392b;
+      --rule: #ddd;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      padding: 2rem 0 1.5rem;
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: baseline;
+      gap: 2.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .nav-name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+    }
+
+    .nav-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--ink);
+    }
+
+    /* PAGES */
+    .page {
+      display: none;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 1.5rem 6rem;
+    }
+
+    .page.active { display: block; }
+
+    /* HOME PAGE */
+    .home-section {
+      padding-top: 5rem;
+    }
+
+    .home-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .home-name {
+      font-size: 2.4rem;
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+      letter-spacing: -0.01em;
+    }
+
+    .home-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .home-bio {
+      font-size: 1.05rem;
+      color: #444;
+      max-width: 480px;
+      line-height: 1.85;
+    }
+
+    .home-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--rule);
+      margin: 3rem 0;
+    }
+
+    .home-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 0.3rem 0.75rem;
+      border-radius: 2rem;
+    }
+
+    /* BLOG PAGE */
+    .blog-section {
+      padding-top: 4rem;
+    }
+
+    .post-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .post-title {
+      font-size: 1.9rem;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 2.5rem;
+    }
+
+    .post-body p {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .post-body p:first-child::first-letter {
+      font-size: 2.8rem;
+      font-weight: 500;
+      float: left;
+      line-height: 0.85;
+      margin-right: 0.1em;
+      margin-top: 0.12em;
+      color: var(--ink);
+    }
+
+    .post-body ol {
+      margin: 0 0 1.5rem 1.2rem;
+      color: #333;
+    }
+
+    .post-body ol li {
+      margin-bottom: 0.6rem;
+      padding-left: 0.3rem;
+    }
+
+    .post-body .callout {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.2rem;
+      margin: 2rem 0;
+      color: #555;
+      font-style: italic;
+    }
+
+    .post-rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 3rem 0;
+    }
+
+    /* ANIMATIONS */
+    .page.active .fade-in {
+      animation: fadeUp 0.45s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page.active .fade-in:nth-child(2) { animation-delay: 0.07s; }
+    .page.active .fade-in:nth-child(3) { animation-delay: 0.14s; }
+    .page.active .fade-in:nth-child(4) { animation-delay: 0.21s; }
+
+    @media (max-width: 500px) {
+      .home-name { font-size: 1.9rem; }
+      .post-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-name" onclick="showPage('home')">avik jain</span>
+    <div class="nav-links">
+      <button class="nav-link active" onclick="showPage('home')" id="nav-home">home</button>
+      <button class="nav-link" onclick="showPage('blog')" id="nav-blog">writing</button>
+    </div>
+  </nav>
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="home-section">
+      <p class="home-label fade-in">introduction</p>
+      <h1 class="home-name fade-in">Hi, I'm <em>Avik Jain.</em></h1>
+      <p class="home-bio fade-in">I love tech, programming, AI, and everything that feels a little bit magical.</p>
+      <div class="home-divider fade-in"></div>
+      <div class="home-tags fade-in">
+        <span class="tag">technology</span>
+        <span class="tag">programming</span>
+        <span class="tag">artificial intelligence</span>
+        <span class="tag">the magical stuff</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG -->
+  <div class="page" id="page-blog">
+    <div class="blog-section">
+      <p class="post-meta fade-in">Opinion &nbsp;·&nbsp; Education</p>
+      <h2 class="post-title fade-in">The Way We Teach Is Broken</h2>
+
+      <div class="post-body fade-in">
+        <p>
+          The traditional model of education has a serious problem. It was designed to produce compliant workers, not curious thinkers — and it shows. Here's what I think is fundamentally broken about it:
+        </p>
+
+        <ol>
+          <li>Students are made to memorize information purely to pass a test, then promptly forget it.</li>
+          <li>Learning is reduced to parroting what's already in the textbook.</li>
+          <li>Everyone is expected to sit in the same room, at the same pace, for hours — regardless of how they actually learn.</li>
+          <li>Too many teachers aren't equipped well enough to teach the subjects they're assigned.</li>
+        </ol>
+
+        <p>
+          There are exceptions, of course. Mathematics is one of them — you can't fake your way through it. You have to <em>apply</em> it. The same goes for programming. You write the code, you see the result. The feedback loop is immediate and honest. There's nowhere to hide, and that's exactly what makes it work.
+        </p>
+
+        <hr class="post-rule" />
+
+        <div class="callout">
+          Would it have killed her to explain what CSS actually <em>does</em> before handing us a list of selectors to copy down?
+        </div>
+
+        <p>
+          I'll give you a concrete example. In eighth grade, I was being taught CSS at school — which, I'll admit, was a privilege not many have. But the way it was taught made that privilege almost meaningless. The teacher walked in, opened her notes, and had us fill entire notebooks with selectors. Property after property, page after page. No context. No purpose. No "here's a broken webpage — fix it."
+        </p>
+
+        <p>
+          She never stopped to ask whether we understood <em>why</em> CSS exists, or what problem it solves. It was box-ticking in its purest form — content delivered so she could justify a lesson plan, not because anyone in that room was going to walk away understanding anything.
+        </p>
+
+        <p>
+          That's the pattern I keep seeing. Delivery without meaning. Coverage without comprehension. School teaching you <em>what</em> while carefully avoiding <em>why</em>.
+        </p>
+
+        <hr class="post-rule" />
+
+        <p>
+          So what should learning actually look like? I think the answer is hiding in plain sight — it's just how human understanding has always worked. We act first. We notice patterns. And eventually, those patterns harden into something we call theory.
+        </p>
+
+        <p>
+          Education has this completely backwards. We hand students the theory upfront, fully formed, stripped of all the mess that produced it, and then wonder why nothing sticks. If you want to teach object-oriented programming, don't open with classes and inheritance. Give students a hundred examples that quietly <em>demand</em> OOP to solve cleanly. Let them feel the friction of not having the right tools. Then, when you finally introduce the concept, it won't feel like an abstract rule to memorize — it'll feel like a relief.
+        </p>
+
+        <div class="callout">
+          The concept should arrive as an answer, not as a premise.
+        </div>
+
+        <p>
+          The same principle applies everywhere: show the problem before you name the solution. Let understanding be earned, not handed over.
+        </p>
+
+        <hr class="post-rule" />
+
+        <p>
+          There's another failure that doesn't get talked about enough: we never tell students <em>why any of this matters to them</em>. Not in a vague, motivational-poster way — in a real, honest way. The purpose of learning history isn't to fill a notebook and pass an exam. It's to understand the world you're living in well enough to actually participate in it. That's a different thing entirely, and it changes how you'd teach it.
+        </p>
+
+        <p>
+          I remember a girl in my class once asking why we needed to learn vectors. It's a fair question — maybe the most honest question a student can ask. My instinct was to explain how vectors are fundamental to computer graphics, game engines, robotics, control systems. The math that makes machines move. But then I caught myself. She might have no interest in any of that, and that's completely valid.
+        </p>
+
+        <p>
+          And yet — that moment points to a real failure. Not hers. The system's. If a student reaches the point of asking "why does this exist?", it means no one ever thought to answer that question before it needed to be asked. Purpose shouldn't be something you justify after the fact. It should be the very first thing on the board.
+        </p>
+
+        <hr class="post-rule" />
+
+        <p>
+          So — what's the solution? I know how this sounds, and I'm not thrilled about being another person who says it, but: AI. Not as a shortcut, not as a replacement for thinking, but as the first tool that can actually deliver the kind of teaching I've been describing — at scale, for everyone, at any hour.
+        </p>
+
+        <p>
+          Think about what a teacher physically cannot do. They can't give thirty students thirty different problems calibrated to where each of them actually is. They can't notice when one student is bored and another is lost. They can't follow up with the right question at the right moment. They lecture, because lecturing is the only thing that works when one person has to reach an entire room. That's not a criticism — it's just the geometry of the situation.
+        </p>
+
+        <p>
+          AI doesn't have that constraint. It can talk <em>with</em> you instead of <em>at</em> you. It can ask questions instead of only answering them. It can push back, suggest, wait, and try a different angle. The protocol I'm imagining — act first, find the pattern, then meet the theory — is so demanding that no single human teacher could sustain it for every student. But that's precisely what makes it a job for AI.
+        </p>
+
+        <div class="callout">
+          Think about how you learned to play a video game. Nobody handed you a manual. You picked up the controller and started pressing buttons.
+        </div>
+
+        <p>
+          Take something like Hitman. The game doesn't open with a thirty-slide tutorial on stealth mechanics. It drops you into a level. You walk around, you experiment, you fail, you try something different. Slowly, almost without noticing, you develop a feel for the rules — because you discovered them yourself through consequence. Then the levels get harder. The environment changes. You're forced to apply what you know in ways you haven't tried yet. You learn by doing, and you keep doing because it's engaging.
+        </p>
+
+        <p>
+          That is how human beings are wired to learn. Not passively receiving information, but actively wrestling with problems just difficult enough to be interesting. Good AI tutoring could work exactly the same way — presenting challenges before concepts, scaling difficulty as understanding deepens, keeping the loop tight between trying and knowing.
+        </p>
+
+        <p>
+          The tragedy of traditional education isn't that teachers don't care. Most of them do. It's that the system asks one person to do something that was never really possible: reach every mind, in the same room, at the same time, in the same way. We've had better tools for a while now. We're just slow to use them.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      document.getElementById('nav-' + name).classList.add('active');
+    }
+  </script>
+</body>
+</html>
